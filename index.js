@@ -1,3 +1,5 @@
+import registerPushNotifications from "./register_push_notifications.js";
+
 function request_notification_permission() {
     // 브라우저가 Notification API를 지원하는지 확인
     if (!("Notification" in window)) {
@@ -8,6 +10,8 @@ function request_notification_permission() {
     switch (Notification.permission) {
         case "granted":
             console.log("알림 권한이 허용되었습니다.");
+
+            registerPushNotifications();
             break;
         case "denied":
             console.log("알림 권한이 거부되었습니다.");
@@ -20,8 +24,7 @@ function request_notification_permission() {
                     if (permission === "granted") {
                         console.log("알림 권한이 허용되었습니다.");
 
-                        // 알림을 테스트로 표시
-                        new Notification("알림 권한이 활성화되었습니다!");
+                        registerPushNotifications();
                     } else if (permission === "denied") {
                         console.log("알림 권한이 거부되었습니다.");
                     } else {
