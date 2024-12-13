@@ -8,4 +8,6 @@ OneSignalDeferred.push(async function (OneSignal) {
         },
         serviceWorkerPath: "./OneSignalSDKWorker.js",
     });
+
+    await OneSignal.login("testuser");
 });
