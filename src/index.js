@@ -1,3 +1,8 @@
+const ONE_SIGNAL_SDK = "https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js";
+const SERVICE_WORKER_PATH = "./serviceWorkers/OneSignalSDKWorker.js";
+const ONE_SIGNAL_APP_ID = import.meta.env.VITE_ONE_SIGNAL_APP_ID;
+const USER_ID = import.meta.env.VITE_USER_ID;
+
 async function configureOneSignal(user_id) {
     // user_id가 없으면 종료
     if (user_id === void 0) {
@@ -5,7 +10,7 @@ async function configureOneSignal(user_id) {
     }
 
     // OneSignalSDK를 동적으로 로드
-    await import("https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js");
+    await import(/* @vite-ignore */ ONE_SIGNAL_SDK);
 
     window.OneSignalDeferred = window.OneSignalDeferred || [];
 
@@ -13,12 +18,12 @@ async function configureOneSignal(user_id) {
     OneSignalDeferred.push(async function (OneSignal) {
         // OneSignal 초기화
         await OneSignal.init({
-            appId: "9ee7de51-45a6-4639-9284-0ad224b0f726",
+            appId: ONE_SIGNAL_APP_ID,
             notifyButton: {
                 enable: true,
             },
             // 서비스워커 설정
-            serviceWorkerPath: "./serviceWorkers/OneSignalSDKWorker.js",
+            serviceWorkerPath: SERVICE_WORKER_PATH,
         });
 
         // OneSignal 사용자 등록
@@ -26,4 +31,4 @@ async function configureOneSignal(user_id) {
     });
 }
 
-configureOneSignal("user_id");
+configureOneSignal(USER_ID);
