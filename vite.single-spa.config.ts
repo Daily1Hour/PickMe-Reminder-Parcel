@@ -9,12 +9,23 @@ export default defineConfig(({ mode }) => {
 
     // 서버포트
     const SERVER_PORT = Number(process.env.VITE_SERVER_PORT);
+    // 기본경로
     const PUBLIC_URL = process.env.VITE_PUBLIC_URL;
 
     const vitePluginSingleSpaOptions = {
         serverPort: SERVER_PORT,
-        spaEntryPoints: "src/parcel.js",
+        spaEntryPoints: "src/app/index.js",
     };
+
+    // single-spa 빌드 진입점 설정
+    switch (process.env.VITE_MF_TYPE) {
+        case "application":
+            vitePluginSingleSpaOptions.spaEntryPoints = "src/app/application.js";
+            break;
+        case "parcel":
+            vitePluginSingleSpaOptions.spaEntryPoints = "src/app/parcel.js";
+            break;
+    }
 
     return {
         plugins: [

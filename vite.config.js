@@ -8,6 +8,7 @@ export default defineConfig(({ mode }) => {
 
     // 서버포트
     const SERVER_PORT = Number(process.env.VITE_SERVER_PORT);
+    // 기본경로
     const PUBLIC_URL = process.env.VITE_PUBLIC_URL;
 
     return {
