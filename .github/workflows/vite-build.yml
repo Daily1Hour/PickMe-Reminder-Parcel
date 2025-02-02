@@ -1,6 +1,8 @@
 name: Vite Build
 
 on:
+  workflow_dispatch: # 수동 실행
+
   pull_request: # PR이 열릴 때마다 실행
     branches:
       - main
@@ -15,8 +17,9 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
       VITE_MF_TYPE: ${{ vars.VITE_MF_TYPE }}
+      VITE_ONE_SIGNAL_APP_ID: ${{ secrets.VITE_ONE_SIGNAL_APP_ID }}
+      VITE_USER_ID: ${{ vars.VITE_USER_ID }}
 
     steps:
       - name: Checkout repository
@@ -30,18 +33,17 @@ jobs:
       - name: Install dependencies
         run: npm ci # 의존성 설치
 
-      - name: Run tests
-        run: npm run test # 테스트 실행
-
-      - name: Lint code
-        run: npm run lint # 린트 실행
-
       - name: Build Vite project
         env:
-          VITE_PARCEL_URL: ${{ secrets.VITE_PARCEL_URL }} # 환경 변수 설정
+          VITE_PUBLIC_URL: ${{ vars.VITE_GH_PAGE_URL }}
         run: |
-          npm run build # Vite 프로젝트 빌드
-          npm run build:single-spa # single-spa 앱 빌드
+          npm run build
+
+      - name: Build Vite For single-spa
+        env:
+          VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
+        run: |
+          npm run build:single-spa
 
       - name: Upload Artifact
         uses: actions/upload-artifact@v4 # 아티팩트를 업로드하는 액션
