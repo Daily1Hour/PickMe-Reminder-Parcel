@@ -1,13 +1,12 @@
 import { configureOneSignal } from "../services/configureOneSignal.js";
-
-const USER_ID = import.meta.env.VITE_USER_ID;
+import { id as user_id } from "../api/getUser.js";
 
 export function bootstrap() {
     return Promise.resolve();
 }
 
 export function mount() {
-    configureOneSignal(USER_ID);
+    configureOneSignal(user_id);
     return Promise.resolve();
 }
 
