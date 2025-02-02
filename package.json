@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
+    "build:single-spa": "vite build --config vite.single-spa.config.ts",
     "preview": "vite preview --host"
   },
   "author": "",
@@ -15,5 +16,8 @@
     "@vitejs/plugin-basic-ssl": "^1.2.0",
     "vite": "^6.0.11",
     "vite-plugin-static-copy": "^2.2.0"
+  },
+  "dependencies": {
+    "vite-plugin-single-spa": "^0.9.0"
   }
 }
