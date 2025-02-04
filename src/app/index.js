@@ -1,5 +1,4 @@
 import { configureOneSignal } from "../services/configureOneSignal.js";
+import { id as user_id } from "../api/getUser.js";
 
-const USER_ID = import.meta.env.VITE_USER_ID;
-
-configureOneSignal(USER_ID);
+configureOneSignal(user_id);

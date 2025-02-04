@@ -31,6 +31,7 @@ export default defineConfig(({ mode }) => {
             port: SERVER_PORT,
         },
         build: {
+            target: "esnext",
             rollupOptions: {
                 output: {
                     // 번들링 파일 이름 설정
