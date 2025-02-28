@@ -19,7 +19,6 @@ jobs:
     env:
       VITE_MF_TYPE: ${{ vars.VITE_MF_TYPE }}
       VITE_ONE_SIGNAL_APP_ID: ${{ secrets.VITE_ONE_SIGNAL_APP_ID }}
-      VITE_USER_ID: ${{ vars.VITE_USER_ID }}
 
     steps:
       - name: Checkout repository

@@ -1,13 +1,14 @@
 {
-  "name": "@pickme/reminder-parcel",
+  "name": "@pickme/reminder",
   "type": "module",
   "version": "0.0.1",
-  "main": "index.ts",
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
-    "build:single-spa": "vite build --config vite.single-spa.config.ts",
-    "preview": "vite preview --host"
+    "build:single-spa": "vite build --mode single-spa",
+    "preview": "vite preview --host",
+    "preview:single-spa": "vite preview --mode single-spa --host",
+    "start": "npm run build && npm run build:single-spa && npm run preview:single-spa"
   },
   "author": "",
   "license": "ISC",
