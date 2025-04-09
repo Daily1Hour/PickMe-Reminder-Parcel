@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      VITE_MF_TYPE: ${{ vars.VITE_MF_TYPE }}
+      VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
       VITE_ONE_SIGNAL_APP_ID: ${{ secrets.VITE_ONE_SIGNAL_APP_ID }}
 
     steps:
@@ -34,14 +34,12 @@ jobs:
 
       - name: Build Vite project
         env:
-          VITE_PUBLIC_URL: ${{ vars.VITE_GH_PAGE_URL }}
           VITE_AUTH_PARCEL_URL: ${{ vars.VITE_GH_PAGE_AUTH_PARCEL_URL }}
         run: |
           npm run build
 
       - name: Build Vite For single-spa
         env:
-          VITE_PUBLIC_URL: ${{ vars.VITE_PUBLIC_URL }}
           VITE_AUTH_PARCEL_URL: ${{ vars.VITE_AUTH_PARCEL_URL }}
         run: |
           npm run build:single-spa

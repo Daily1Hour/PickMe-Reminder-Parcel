@@ -26,21 +26,10 @@ export default defineConfig(({ mode }) => {
 
     if (mode === "single-spa") {
         // single-spa 옵션 설정
-        const vitePluginSingleSpaOptions = {
+        plugins.push(vitePluginSingleSpa({
             serverPort: SERVER_PORT,
-            spaEntryPoints: "src/app/index.js",
-        };
-
-        // single-spa 빌드 진입점 설정
-        switch (process.env.VITE_MF_TYPE) {
-            case "application":
-                vitePluginSingleSpaOptions.spaEntryPoints = "src/app/application.js";
-                break;
-            case "parcel":
-                vitePluginSingleSpaOptions.spaEntryPoints = "src/app/parcel.js";
-                break;
-        }
-        plugins.push(vitePluginSingleSpa(vitePluginSingleSpaOptions)); // single-spa 라이브러리 적용
+            spaEntryPoints: "src/app/parcel.js",
+        }));
     }
 
     return {
